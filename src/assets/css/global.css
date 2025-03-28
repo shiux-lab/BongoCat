@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "cat";
-  src: url("../fonts/cat.woff2") format("woff2");
+  font-family: 'cat';
+  src: url('../fonts/cat.woff2') format('woff2');
 }
 
 html {

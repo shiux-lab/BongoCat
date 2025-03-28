@@ -1,5 +1,8 @@
 use tauri::{ActivationPolicy, AppHandle, Emitter, EventTarget, WebviewWindow};
-use tauri_nspanel::{cocoa::appkit::NSWindowCollectionBehavior, panel_delegate, WebviewWindowExt};
+use tauri_nspanel::{
+    cocoa::appkit::{NSMainMenuWindowLevel, NSWindowCollectionBehavior},
+    panel_delegate, WebviewWindowExt,
+};
 use tauri_plugin_custom_window::MAIN_WINDOW_LABEL;
 
 #[allow(non_upper_case_globals)]
@@ -22,7 +25,7 @@ pub fn platform(
 
     let panel = main_window.to_panel().unwrap();
 
-    panel.set_level(20);
+    panel.set_level(NSMainMenuWindowLevel);
 
     panel.set_style_mask(NSWindowStyleMaskNonActivatingPanel | NSResizableWindowMask);
 

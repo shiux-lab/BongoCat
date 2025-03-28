@@ -1,3 +1,3 @@
 declare interface Window {
-	availableKeys: string[];
+  availableKeys: string[]
 }

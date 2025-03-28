@@ -1,12 +1,12 @@
 {
-	"identifier": "com.ayangweb.BongoCat",
-	"bundle": {
-		"windows": {
-			"digestAlgorithm": "sha256",
-			"nsis": {
-				"languages": ["SimpChinese"],
-				"installMode": "both"
-			}
-		}
-	}
+  "identifier": "com.ayangweb.BongoCat",
+  "bundle": {
+    "windows": {
+      "digestAlgorithm": "sha256",
+      "nsis": {
+        "languages": ["SimpChinese"],
+        "installMode": "both"
+      }
+    }
+  }
 }

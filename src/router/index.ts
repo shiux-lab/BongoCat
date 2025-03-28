@@ -1,14 +1,21 @@
-import { createHashRouter } from "react-router-dom";
-import Main from "../pages/Main";
-import Preference from "../pages/Preference";
+import { createRouter, createWebHashHistory } from 'vue-router'
+import Main from '../pages/main.vue'
+import Preference from '../pages/preference.vue'
 
-export const router = createHashRouter([
-	{
-		path: "/",
-		Component: Main,
-	},
-	{
-		path: "/preference",
-		Component: Preference,
-	},
-]);
+const routes = [
+  {
+    path: '/',
+    component: Main,
+  },
+  {
+    path: '/preference',
+    component: Preference,
+  },
+]
+
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
+})
+
+export default router

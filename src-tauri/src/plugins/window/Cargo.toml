@@ -9,6 +9,7 @@ links = "tauri-plugin-custom-window"
 
 [dependencies]
 tauri.workspace = true
+
 serde.workspace = true
 
 [build-dependencies]

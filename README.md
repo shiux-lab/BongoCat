@@ -15,9 +15,9 @@
       />
     </a >
     <a href="https://github.com/ayangweb/BongoCat/releases">
-      <img 
+      <img
         alt="Linux"
-        src="https://img.shields.io/badge/-Linux-yellow?style=flat-square&logo=linux&logoColor=white" 
+        src="https://img.shields.io/badge/-Linux-yellow?style=flat-square&logo=linux&logoColor=white"
       />
     </a>
   </div>
@@ -36,7 +36,7 @@
     <a href="https://github.com/ayangweb/BongoCat/releases">
       <img
         src="https://img.shields.io/github/downloads/ayangweb/BongoCat/total?style=flat-square"
-      />  
+      />
     </a >
   </div>
 </div>
