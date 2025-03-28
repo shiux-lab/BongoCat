@@ -1,6 +1,45 @@
-# BongoCat
+![BongoCat](https://socialify.git.ci/ayangweb/BongoCat/image?description=1&font=Source+Code+Pro&forks=1&issues=1&logo=https%3A%2F%2Fgithub.com%2Fayangweb%2FBongoCat%2Fblob%2Fcf4060302cab48e7567e19d1df62ad83b89edb7c%2Fsrc-tauri%2Fassets%2Flogo.png%3Fraw%3Dtrue&name=1&owner=1&pattern=Floating+Cogs&pulls=1&stargazers=1&theme=Light)
 
-一款基于 Tauri 开发的跨平台桌面应用，让呆萌可爱的 Bongo Cat 陪伴你的键盘敲击与鼠标操作，每一次输入都充满趣味与活力！
+<div align="center">
+  <div>
+    <a href="https://github.com/ayangweb/BongoCat/releases">
+      <img
+        alt="Windows"
+        src="https://img.shields.io/badge/-Windows-blue?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB0PSIxNzI2MzA1OTcxMDA2IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE1NDgiIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4Ij48cGF0aCBkPSJNNTI3LjI3NTU1MTYxIDk2Ljk3MTAzMDEzdjM3My45OTIxMDY2N2g0OTQuNTEzNjE5NzVWMTUuMDI2NzU3NTN6TTUyNy4yNzU1NTE2MSA5MjguMzIzNTA4MTVsNDk0LjUxMzYxOTc1IDgwLjUyMDI4MDQ5di00NTUuNjc3NDcxNjFoLTQ5NC41MTM2MTk3NXpNNC42NzA0NTEzNiA0NzAuODMzNjgyOTdINDIyLjY3Njg1OTI1VjExMC41NjM2ODE5N2wtNDE4LjAwNjQwNzg5IDY5LjI1Nzc5NzUzek00LjY3MDQ1MTM2IDg0Ni43Njc1OTcwM0w0MjIuNjc2ODU5MjUgOTE0Ljg2MDMxMDEzVjU1My4xNjYzMTcwM0g0LjY3MDQ1MTM2eiIgcC1pZD0iMTU0OSIgZmlsbD0iI2ZmZmZmZiI+PC9wYXRoPjwvc3ZnPg=="
+      />
+    </a >
+    <a href="https://github.com/ayangweb/BongoCat/releases">
+      <img
+        alt="MacOS"
+        src="https://img.shields.io/badge/-MacOS-black?style=flat-square&logo=apple&logoColor=white"
+      />
+    </a >
+    <a href="https://github.com/ayangweb/BongoCat/releases">
+      <img 
+        alt="Linux"
+        src="https://img.shields.io/badge/-Linux-yellow?style=flat-square&logo=linux&logoColor=white" 
+      />
+    </a>
+  </div>
+
+  <div>
+    <a href="./LICENSE">
+      <img
+        src="https://img.shields.io/github/license/ayangweb/BongoCat?style=flat-square"
+      />
+    </a >
+    <a href="https://github.com/ayangweb/BongoCat/releases">
+      <img
+        src="https://img.shields.io/github/package-json/v/ayangweb/BongoCat?style=flat-square"
+      />
+    </a >
+    <a href="https://github.com/ayangweb/BongoCat/releases">
+      <img
+        src="https://img.shields.io/github/downloads/ayangweb/BongoCat/total?style=flat-square"
+      />  
+    </a >
+  </div>
+</div>
 
 ## 灵感来源
 
@@ -10,10 +49,10 @@
 
 ## 历史星标
 
-<a href="https://www.star-history.com/#EcoPasteHub/EcoPaste&ayangweb/BongoCat&Date">
+<a href="https://www.star-history.com/#ayangweb/BongoCat&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=EcoPasteHub/EcoPaste,ayangweb/BongoCat&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=EcoPasteHub/EcoPaste,ayangweb/BongoCat&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=EcoPasteHub/EcoPaste,ayangweb/BongoCat&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ayangweb/BongoCat&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ayangweb/BongoCat&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ayangweb/BongoCat&type=Date" />
  </picture>
 </a>
