@@ -1,8 +1,8 @@
-use rdev::{listen, Event, EventType};
+use rdev::{exit_grab, grab, Event, EventType};
 use serde::Serialize;
 use serde_json::{json, Value};
 use std::sync::atomic::{AtomicBool, Ordering};
-use tauri::{AppHandle, Emitter};
+use tauri::{command, AppHandle, Emitter};
 
 static IS_RUNNING: AtomicBool = AtomicBool::new(false);
 
@@ -21,9 +21,10 @@ pub struct DeviceEvent {
     value: Value,
 }
 
-pub fn start_listening(app_handle: AppHandle) {
+#[command]
+pub fn start_listening(app_handle: AppHandle) -> Result<bool, String> {
     if IS_RUNNING.load(Ordering::SeqCst) {
-        return;
+        return Err("Device listener is already running".to_string());
     }
 
     IS_RUNNING.store(true, Ordering::SeqCst);
@@ -50,23 +51,30 @@ pub fn start_listening(app_handle: AppHandle) {
                 kind: DeviceKind::KeyboardRelease,
                 value: json!(format!("{:?}", key)),
             },
-            _ => return,
+            _ => return Some(event),
         };
 
         if let Err(e) = app_handle.emit("device-changed", device) {
             eprintln!("Failed to emit event: {:?}", e);
         }
+
+        Some(event)
     };
 
-    #[cfg(target_os = "macos")]
-    if let Err(e) = listen(callback) {
-        eprintln!("Device listening error: {:?}", e);
+    grab(callback).map_err(|err| format!("{:?}", err))?;
+
+    Ok(true)
+}
+
+#[command]
+pub fn stop_listening() -> Result<bool, String> {
+    if !IS_RUNNING.load(Ordering::SeqCst) {
+        return Err("Device listener is not running".to_string());
     }
 
-    #[cfg(not(target_os = "macos"))]
-    std::thread::spawn(move || {
-        if let Err(e) = listen(callback) {
-            eprintln!("Device listening error: {:?}", e);
-        }
-    });
+    exit_grab().map_err(|err| format!("{:?}", err))?;
+
+    IS_RUNNING.store(false, Ordering::SeqCst);
+
+    Ok(true)
 }

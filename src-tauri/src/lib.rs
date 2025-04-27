@@ -1,6 +1,9 @@
 mod core;
 
-use core::{device, prevent_default, setup};
+use core::{
+    device::{start_listening, stop_listening},
+    prevent_default, setup,
+};
 use tauri::{Manager, WindowEvent};
 use tauri_plugin_autostart::MacosLauncher;
 use tauri_plugin_custom_window::{
@@ -19,10 +22,9 @@ pub fn run() {
 
             setup::default(&app_handle, main_window.clone(), preference_window.clone());
 
-            device::start_listening(app_handle.clone());
-
             Ok(())
         })
+        .invoke_handler(tauri::generate_handler![start_listening, stop_listening])
         .plugin(tauri_plugin_custom_window::init())
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_process::init())
@@ -46,7 +48,7 @@ pub fn run() {
         .plugin(tauri_plugin_log::Builder::new().build())
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
-            Some(vec!["--auto-launch"]),
+            None,
         ))
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

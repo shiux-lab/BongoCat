@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { invoke } from '@tauri-apps/api/core'
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
 import { useDebounceFn, useEventListener } from '@vueuse/core'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 
 import { useDevice } from '@/composables/useDevice'
 import { useModel } from '@/composables/useModel'
+import { LISTEN_KEY } from '@/constants'
 import { useCatStore } from '@/stores/cat'
 
 const appWindow = getCurrentWebviewWindow()
@@ -14,7 +16,11 @@ const catStore = useCatStore()
 
 const resizing = ref(false)
 
-onMounted(handleLoad)
+onMounted(() => {
+  invoke(LISTEN_KEY.START_LISTENING)
+
+  handleLoad()
+})
 
 onUnmounted(handleDestroy)
 
@@ -38,7 +44,7 @@ watch(pressedKeys, handleKeyDown)
 
 watch(() => catStore.penetrable, (value) => {
   appWindow.setIgnoreCursorEvents(value)
-}, { immediate: true })
+})
 
 function handleWindowDrag() {
   appWindow.startDragging()
