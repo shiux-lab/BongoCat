@@ -68,6 +68,7 @@
 
 ### Linux (X11)
 
+- Manjaro / ArchLinux: `yay -S bongo-cat`
 - Debian / Ubuntu：下载 `BongoCat_amd64.deb`
 - Fedora / RHEL：下载 `BongoCat_x86_64.rpm`
 - 通用版本：下载 `BongoCat_amd64.AppImage`
@@ -83,9 +84,9 @@
 ## 历史星标
 
 <a href="https://www.star-history.com/#ayangweb/BongoCat&Date">
-<picture>
-<source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ayangweb/BongoCat&type=Date&theme=dark" />
-<source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ayangweb/BongoCat&type=Date" />
-<img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ayangweb/BongoCat&type=Date" />
-</picture>
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ayangweb/BongoCat&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ayangweb/BongoCat&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ayangweb/BongoCat&type=Date" />
+ </picture>
 </a>
