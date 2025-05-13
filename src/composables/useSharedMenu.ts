@@ -1,6 +1,7 @@
 import type { CatMode } from '@/stores/cat'
 
 import { CheckMenuItem, MenuItem, PredefinedMenuItem, Submenu } from '@tauri-apps/api/menu'
+import { range } from 'es-toolkit'
 
 import { hideWindow, showWindow } from '@/plugins/window'
 import { useCatStore } from '@/stores/cat'
@@ -18,8 +19,32 @@ export function useSharedMenu() {
     { label: '键盘模式', value: 'keyboard' },
   ]
 
+  const getScaleMenuItems = async () => {
+    const options = range(50, 151, 25)
+
+    const items = options.map((item) => {
+      return CheckMenuItem.new({
+        text: item === 100 ? '默认' : `${item}%`,
+        checked: catStore.scale === item,
+        action: () => {
+          catStore.scale = item
+        },
+      })
+    })
+
+    if (!options.includes(catStore.scale)) {
+      items.unshift(CheckMenuItem.new({
+        text: `${catStore.scale}%`,
+        checked: true,
+        enabled: false,
+      }))
+    }
+
+    return Promise.all(items)
+  }
+
   const getOpacityMenuItems = async () => {
-    const options = [25, 50, 75, 100]
+    const options = range(25, 101, 25)
 
     const items = options.map((item) => {
       return CheckMenuItem.new({
@@ -82,6 +107,10 @@ export function useSharedMenu() {
         action: () => {
           catStore.penetrable = !catStore.penetrable
         },
+      }),
+      Submenu.new({
+        text: '窗口尺寸',
+        items: await getScaleMenuItems(),
       }),
       Submenu.new({
         text: '不透明度',

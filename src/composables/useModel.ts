@@ -1,4 +1,4 @@
-import { LogicalSize } from '@tauri-apps/api/dpi'
+import { LogicalSize, PhysicalSize } from '@tauri-apps/api/dpi'
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
 import { round } from 'es-toolkit'
 import { computed, watch } from 'vue'
@@ -13,6 +13,8 @@ import { useCatStore } from '@/stores/cat'
 import { useModelStore } from '@/stores/model'
 import { getImageSize } from '@/utils/dom'
 
+const appWindow = getCurrentWebviewWindow()
+
 export function useModel() {
   const catStore = useCatStore()
   const modelStore = useModelStore()
@@ -22,6 +24,17 @@ export function useModel() {
   const backgroundImagePath = computed(() => {
     return `/images/backgrounds/${catStore.mode}.png`
   })
+
+  watch(() => catStore.scale, async () => {
+    const { width, height } = await getImageSize(backgroundImagePath.value)
+
+    appWindow.setSize(
+      new PhysicalSize({
+        width: round(width * (catStore.scale / 100)),
+        height: round(height * (catStore.scale / 100)),
+      }),
+    )
+  }, { immediate: true })
 
   useTauriListen<number>(LISTEN_KEY.PLAY_EXPRESSION, ({ payload }) => {
     live2d.playExpressions(payload)
@@ -42,20 +55,23 @@ export function useModel() {
   async function handleResize() {
     if (!live2d.model) return
 
-    const appWindow = getCurrentWebviewWindow()
     const { innerWidth, innerHeight } = window
     const { width, height } = await getImageSize(backgroundImagePath.value)
 
     live2d.model?.scale.set(innerWidth / width)
 
-    if (round(innerWidth / innerHeight, 1) === round(width / height, 1)) return
+    if (round(innerWidth / innerHeight, 1) !== round(width / height, 1)) {
+      await appWindow.setSize(
+        new LogicalSize({
+          width: innerWidth,
+          height: Math.ceil(innerWidth * (height / width)),
+        }),
+      )
+    }
 
-    return appWindow.setSize(
-      new LogicalSize({
-        width: innerWidth,
-        height: Math.ceil(innerWidth * (height / width)),
-      }),
-    )
+    const size = await appWindow.size()
+
+    catStore.scale = round((size.width / width) * 100)
   }
 
   function handleKeyDown(value: string[]) {
