@@ -26,6 +26,13 @@
     "prevent-default:default",
     "autostart:default",
     "macos-permissions:default",
-    "dialog:default"
+    "dialog:default",
+    "fs:default",
+    "fs:read-all",
+    "fs:write-all",
+    {
+      "identifier": "fs:scope",
+      "allow": ["**/*"]
+    }
   ]
 }

@@ -1,4 +1,4 @@
-use tauri::{ActivationPolicy, AppHandle, Emitter, EventTarget, WebviewWindow};
+use tauri::{AppHandle, Emitter, EventTarget, WebviewWindow};
 use tauri_nspanel::{
     cocoa::appkit::{NSMainMenuWindowLevel, NSWindowCollectionBehavior},
     panel_delegate, WebviewWindowExt,
@@ -21,7 +21,7 @@ pub fn platform(
 ) {
     let _ = app_handle.plugin(tauri_nspanel::init());
 
-    let _ = app_handle.set_activation_policy(ActivationPolicy::Accessory);
+    let _ = app_handle.set_dock_visibility(false);
 
     let panel = main_window.to_panel().unwrap();
 
