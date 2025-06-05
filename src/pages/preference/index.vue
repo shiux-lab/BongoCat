@@ -1,23 +1,37 @@
 <script setup lang="ts">
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
 import { Flex } from 'ant-design-vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 import About from './components/about/index.vue'
 import Cat from './components/cat/index.vue'
 import General from './components/general/index.vue'
 import Model from './components/model/index.vue'
+import Shortcut from './components/shortcut/index.vue'
 
 import UpdateApp from '@/components/update-app/index.vue'
 import { useTray } from '@/composables/useTray'
+import { hideWindow, showWindow } from '@/plugins/window'
 import { useAppStore } from '@/stores/app'
 import { isMac } from '@/utils/platform'
 
 const { createTray } = useTray()
+const appWindow = getCurrentWebviewWindow()
 const appStore = useAppStore()
 const current = ref(0)
 
 onMounted(async () => {
   createTray()
+
+  appWindow.onCloseRequested((event) => {
+    event.preventDefault()
+
+    appStore.visiblePreference = false
+  })
+})
+
+watch(() => appStore.visiblePreference, (value) => {
+  value ? showWindow() : hideWindow()
 })
 
 const menus = [
@@ -35,6 +49,11 @@ const menus = [
     label: '模型管理',
     icon: 'i-solar:magic-stick-3-bold',
     component: Model,
+  },
+  {
+    label: '快捷键',
+    icon: 'i-solar:keyboard-bold',
+    component: Shortcut,
   },
   {
     label: '关于',

@@ -2,7 +2,7 @@ mod core;
 mod utils;
 
 use core::{device, prevent_default, setup};
-use tauri::{Manager, WindowEvent, generate_handler};
+use tauri::{Manager, generate_handler};
 use tauri_plugin_autostart::MacosLauncher;
 use tauri_plugin_custom_window::{
     MAIN_WINDOW_LABEL, PREFERENCE_WINDOW_LABEL, show_preference_window,
@@ -47,14 +47,7 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_clipboard_manager::init())
-        .on_window_event(|window, event| match event {
-            WindowEvent::CloseRequested { api, .. } => {
-                let _ = window.hide();
-
-                api.prevent_close();
-            }
-            _ => {}
-        })
+        .plugin(tauri_plugin_global_shortcut::Builder::new().build())
         .build(tauri::generate_context!())
         .expect("error while running tauri application");
 
