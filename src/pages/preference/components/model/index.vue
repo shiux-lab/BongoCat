@@ -4,7 +4,9 @@ import type { Model } from '@/stores/model'
 import { convertFileSrc } from '@tauri-apps/api/core'
 import { remove } from '@tauri-apps/plugin-fs'
 import { revealItemInDir } from '@tauri-apps/plugin-opener'
+import { useElementSize } from '@vueuse/core'
 import { Card, message, Popconfirm } from 'ant-design-vue'
+import { ref } from 'vue'
 import { MasonryGrid, MasonryGridItem } from 'vue3-masonry-css'
 
 import FloatMenu from './components/float-menu/index.vue'
@@ -14,6 +16,9 @@ import { useModelStore } from '@/stores/model'
 import { join } from '@/utils/path'
 
 const modelStore = useModelStore()
+const firstItemRef = ref<HTMLElement>()
+
+const { height } = useElementSize(firstItemRef)
 
 async function handleDelete(item: Model) {
   const { id, path } = item
@@ -40,14 +45,15 @@ async function handleDelete(item: Model) {
     :gutter="16"
   >
     <MasonryGridItem>
-      <Upload />
+      <Upload :style="{ height: `${height}px` }" />
     </MasonryGridItem>
 
     <MasonryGridItem
-      v-for="item in modelStore.models"
+      v-for="(item, index) in modelStore.models"
       :key="item.id"
     >
       <Card
+        :ref="index === 0 ? 'firstItemRef' : void 0"
         hoverable
         size="small"
         @click="modelStore.currentModel = item"
