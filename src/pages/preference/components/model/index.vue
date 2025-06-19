@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Model } from '@/stores/model'
+import type { ComponentPublicInstance } from 'vue'
 
 import { convertFileSrc } from '@tauri-apps/api/core'
 import { remove } from '@tauri-apps/plugin-fs'
@@ -19,6 +20,18 @@ const modelStore = useModelStore()
 const firstItemRef = ref<HTMLElement>()
 
 const { height } = useElementSize(firstItemRef)
+
+function setFirstItemRef(el: Element | ComponentPublicInstance | null, index: number) {
+  if (!el || index > 0) return
+
+  if ('$el' in el) {
+    return firstItemRef.value = el.$el
+  }
+
+  if (el instanceof HTMLElement) {
+    firstItemRef.value = el
+  }
+}
 
 async function handleDelete(item: Model) {
   const { id, path } = item
@@ -53,7 +66,7 @@ async function handleDelete(item: Model) {
       :key="item.id"
     >
       <Card
-        :ref="index === 0 ? 'firstItemRef' : void 0"
+        :ref="(el) => setFirstItemRef(el, index)"
         hoverable
         size="small"
         @click="modelStore.currentModel = item"
